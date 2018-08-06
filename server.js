@@ -7,7 +7,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const passport = require('passport');
 
-const { PORT, CLIENT_ORIGIN } = require('./config');
+const { PORT, CLIENT_ORIGIN } = require('./config.js');
 const localStrategy = require('./passport/local.js');
 const jwtStrategy = require('./passport/jwt.js');
 const { dbConnect } = require('./db-mongoose');
@@ -20,6 +20,7 @@ passport.use(jwtStrategy);
 // Import routers for specific endpoints
 const authRouter = require('./routes/auth.js');
 const usersRouter = require('./routes/users.js');
+const protectedRouter = require('./routes/protected.js');
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.use((req, res, next) => {
 // API routes
 app.use('/api', authRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/protected', protectedRouter);
 
 // Custom 404 Not Found route handler
 app.use((req, res, next) => {
