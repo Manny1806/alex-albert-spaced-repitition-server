@@ -10,6 +10,10 @@ const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
 // const {dbConnect} = require('./db-knex');
 
+// Import routers for specific endpoints
+const authRouter = require('./routes/auth.js');
+const usersRouter = require('./routes/users.js');
+
 const app = express();
 
 // Parse request body
@@ -35,6 +39,10 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+// API routes
+app.use('/api', authRouter);
+app.use('/api/users', usersRouter);
 
 // Custom 404 Not Found route handler
 app.use((req, res, next) => {
