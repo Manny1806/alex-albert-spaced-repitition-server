@@ -5,10 +5,17 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const passport = require('passport');
 
 const { PORT, CLIENT_ORIGIN } = require('./config');
+const localStrategy = require('./passport/local.js');
+const jwtStrategy = require('./passport/jwt.js');
 const { dbConnect } = require('./db-mongoose');
 // const {dbConnect} = require('./db-knex');
+
+// Configure Passport to utilize strategies, this just loads into memory
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 // Import routers for specific endpoints
 const authRouter = require('./routes/auth.js');
