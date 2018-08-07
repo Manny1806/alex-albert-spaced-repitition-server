@@ -8,9 +8,10 @@ const Question = require('../models/question.js');
 // mongoimport --uri MONGODB_URI --collection COLLECTION_NAME --file FILE_NAME --jsonArray
 
 /* ========== GET A POKEMON ========== */
-router.get('/', (req, res, next) => {
+router.get('/:count', (req, res, next) => {
+  console.log(req.params.count)
   return Question
-    .findOne()
+    .findOne().skip(Number(req.params.count))
     .then(result=>res.json(result))
     .catch(err => {
       // Forward validation errors on to the client, otherwise give a 500
