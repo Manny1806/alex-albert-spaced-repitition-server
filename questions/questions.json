@@ -1,0 +1,33 @@
+// mongoimport --uri MONGODB_URI --collection COLLECTION_NAME --file FILE_NAME --jsonArray
+
+[
+  {
+    "pokedex": "001",
+    "name": "Bulbasaur",
+    "typeColor": "Grass",
+    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png",
+    "imageDescription": "A green Pokemon with a bud on its back",
+    "description": "This grass type Pokemon has a bud on its back. It is half plant and half animal."
+  },
+  {
+    "pokedex": "132",
+    "name": "Ditto",
+    "typeColor": "Normal",
+    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/3/36/132Ditto.png/250px-132Ditto.png",
+    "imageDescription": "A purple shapeless Pokemon.",
+    "description": "This formless Pokemon has the unique ability to transform itself into other Pokemon species, mimicking their apperance and abilities."
+  }
+]
+
+/*
+pikachu
+bulbasaur
+ditto
+snorlax
+arcanine
+eevee
+lapras
+magikarp
+jigglypuff
+cubone
+*/
