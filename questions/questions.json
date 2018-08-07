@@ -1,5 +1,3 @@
-// mongoimport --uri MONGODB_URI --collection COLLECTION_NAME --file FILE_NAME --jsonArray
-
 [
   {
     "pokedex": 1,
