@@ -20,6 +20,24 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  questions: [
+    {
+      question: {
+        id: mongoose.Schema.Types.ObjectId,
+        pokedex: {type: Number, required: true, unique: true},
+        typeColor: {type: String, required: true},
+        imageURL: {type: String, required: true},
+        imageDescription: {type: String, required: true},
+        description: {type: String, required: true},
+      },
+      memoryStrength: Number,
+      next: Number
+    }
+  ],
+  head: {
+    type: Number,
+    default: 0
   }
 });
 

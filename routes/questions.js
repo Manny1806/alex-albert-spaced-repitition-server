@@ -9,7 +9,7 @@ const Question = require('../models/question.js');
 
 /* ========== GET A POKEMON ========== */
 router.get('/:count', (req, res, next) => {
-  console.log(req.params.count)
+  console.log(req.params.count);
   return Question
     .findOne().skip(Number(req.params.count))
     .then(result=>res.json(result))

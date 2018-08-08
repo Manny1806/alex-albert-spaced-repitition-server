@@ -4,11 +4,13 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/user.js');
+const Questions = require('../models/question.js');
 
 /* ========== POST/CREATE A USER ========== */
 router.post('/', (req, res, next) => {
   const { firstName, lastName, username, password } = req.body;
-  
+  let questions = [];
+
   // verify required fields exist
   const requiredFields = ['firstName', 'lastName', 'username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
@@ -79,12 +81,22 @@ router.post('/', (req, res, next) => {
   }
 
   // all validations passed, hash password and create user
-  return User
-    .find({username})
-    .count()
+  return Questions
+    .find()
+    .then(results => {
+      questions = results.map((question, index) => {
+        delete question.name;
+        return {
+          question,
+          memoryStrength: 1,
+          next: index === results.length - 1 ? null : index + 1
+        };
+      });
+    })
+    .then(() => User.find({username}).count())
     .then(count => {
       if (count > 0) {
-        // There is an existing user with the same username
+      // There is an existing user with the same username
         return Promise.reject({
           code: 422,
           reason: 'ValidationError',
@@ -100,10 +112,13 @@ router.post('/', (req, res, next) => {
         lastName,
         username,
         password: digest,
+        questions
       };
+      console.log(newUser);
       return User.create(newUser);
     })
     .then(user => {
+      console.log(user);
       return res
         .status(201)
         .location(`/api/users/${user.id}`)
