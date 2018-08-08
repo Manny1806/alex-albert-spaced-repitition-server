@@ -23,36 +23,49 @@ router.post('/', jwtAuth, (req, res, next) => {
 router.post('/:id', jwtAuth, (req, res, next) => {
   const { id } = req.params;
   const { input, userId } = req.body;
+
+  let resultPokemonName
   return Question
     .findById(id)
     // .then(result => result.name === input ? res.json({bool: true, name: result.name}) : res.json({bool: false, name: result.name}))
-    .then(result => result.name === input ? {isCorrect: true, answer: result.name} : {isCorrect: false, answer: result.name})
+    .then(result => {
+      console.log("triggered")
+      resultPokemonName = result.name
+      return result.name === input ? {isCorrect: true, answer: result.name} : {isCorrect: false, answer: result.name}})
     .then(answer => {
       if (answer.isCorrect) {
-        // update user's list of questions
-        // call up user's list of question, modify
         User
           .findById(userId)
           .then(user => {
-            // already know where we are based on head
-            // find insertion point, which is question[newMemValue]
-            // so question[newMemValue].next changes to currHead
-            let currHead = user.questions[user.head];
-            let currMemValue = user.questions[user.head].memoryStrength;
-            let currNext = user.questions[user.head].next;
-            let nextQuestion;
-
-            currMemValue *= 2;
-            currHead = currNext;
-            currNext;
-
-            // return User.findAndUpdate()
+            let newQuestions = user
+            let newHead = newQuestions.questions[user.head].next;
+            newQuestions.questions[user.head].memoryStrength *= 2
+            newQuestions.questions[user.head].next = newQuestions.questions[newQuestions.questions[user.head].memoryStrength].next
+            // newQuestions.questions[user.head].next =  user.questions[user.head].memoryStrength * 2
+            // newQuestions.questions[user.head].memoryStrength *= 2
+            newQuestions.questions[newQuestions.questions[user.head].memoryStrength].next = user.head
+            newQuestions.head = newHead
+            console.log(newQuestions)
+            return User.findByIdAndUpdate(userId, {head: newHead, questions: newQuestions.questions})
           })
+          .then(()=>res.json({bool: true, name: resultPokemonName}))
           .catch();
         // send user feedback using res.json
       } else {
-        // update user's list of questions
-        User.findById(userId).then().catch();
+        User
+          .findById(userId)
+          .then(user => {
+            let newQuestions = user
+            let newHead = newQuestions.questions[user.head].next;
+            newQuestions.questions[user.head].next =  user.questions[user.head].memoryStrength
+            newQuestions.questions[user.head].memoryStrength = 1
+            newQuestions.questions[newQuestions.questions[user.head].next].next = user.head
+            newQuestions.head = newHead
+            console.log(newQuestions)
+            return User.findByIdAndUpdate(userId, {head: newHead, questions: newQuestions.questions})
+          })
+          .then(()=>res.json({bool: false, name: resultPokemonName}))
+          .catch();
         // send user feedback using res.json
       }
     })
