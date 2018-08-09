@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     {
       question: {
         id: mongoose.Schema.Types.ObjectId,
-        pokedex: {type: Number, required: true, unique: true},
+        pokedex: {type: Number, required: true},
         typeColor: {type: String, required: true},
         imageURL: {type: String, required: true},
         imageDescription: {type: String, required: true},
