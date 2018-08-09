@@ -15,7 +15,8 @@ router.get('/:id', jwtAuth, (req, res, next) => {
   return User
     .findById(id)
     .then(user => {
-      delete user.questions[user.head].question.name
+      console.log(user.questions[user.head]);
+      delete user.questions[user.head].question.name;
       return res.json(user.questions[user.head]);
     })
     .catch(err => next(err));
@@ -23,23 +24,22 @@ router.get('/:id', jwtAuth, (req, res, next) => {
 
 /* ========== GET ANSWER FOR A POKEMON ========== */
 router.post('/:id', jwtAuth, (req, res, next) => {
-  const { id } = req.params;
   const { input, userId } = req.body;
 
-  let resultPokemonName;
   return User 
     .findById(userId)
     .then(user => {
-      // grab current "node"
-
-      console.log(user.questions[user.head].question.name)
-      let answer 
+      const answer = {
+        name: user.questions[user.head].question.name
+      };
       if (user.questions[user.head].question.name === input) {
-        answer = {bool: true, name: user.questions[user.head].question.name}
+        answer.bool = true;
       }
       else {
-        answer = {bool: false, name: user.questions[user.head].question.name}
-      } 
+        answer.bool = false;
+      }
+
+      // grab current "node"
       const currentQuestion = user.questions[user.head];
       // save for later as next pointer of insertAfterQuestion
       const currentHead = user.head;
@@ -80,6 +80,14 @@ router.post('/:id', jwtAuth, (req, res, next) => {
       insertAfterQuestion.next = currentHead;
 
       user.save();
+
+      Object.assign(
+        answer, {
+          attempts: currentQuestion.attempts,
+          passed: currentQuestion.passed
+        }
+      );
+
       return answer;
     })
     .then(answer => res.json(answer))
@@ -91,7 +99,5 @@ router.post('/:id', jwtAuth, (req, res, next) => {
       res.status(500).json({code: 500, message: 'Internal server error'});
     });
 });
-
-
 
 module.exports = router;
