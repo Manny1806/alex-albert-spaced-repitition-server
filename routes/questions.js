@@ -24,101 +24,102 @@ router.post('/:id', jwtAuth, (req, res, next) => {
   const { id } = req.params;
   const { input, userId } = req.body;
 
-  let resultPokemonName
+  let resultPokemonName;
   return Question
     .findById(id)
-    // .then(result => result.name === input ? res.json({bool: true, name: result.name}) : res.json({bool: false, name: result.name}))
     .then(result => {
-      console.log(result)
-      resultPokemonName = result.name
-      return result.name === input ? {isCorrect: true, answer: result.name} : {isCorrect: false, answer: result.name}})
+      resultPokemonName = result.name;
+      return result.name === input ? {bool: true, name: result.name} : {bool: false, name: result.name};
+    })
     .then(answer => {
-      console.log("triggered")
-      if (answer.isCorrect) {
-        User
-          .findById(userId)
-          .then(user => {
-            console.log(user)
-            let currentQuestion = user.questions[user.head]
-            let currentIndex = user.head
+      User
+        .findById(userId)
+        .then(user => {
+          // grab current "node"
+          const currentQuestion = user.questions[user.head];
+          // save for later as next pointer of insertAfterQuestion
+          const currentHead = user.head;
+          // set header to next node
+          user.head = currentQuestion.next;
+
+          if (answer.bool) {
+            // if answer is correct, double memoryStrength
             currentQuestion.memoryStrength *= 2;
-            user.head = currentQuestion.next;
-            let insertAfterQuestion = currentQuestion;
-            let currQ = currentQuestion;
-              for (let i = 0; i < currentQuestion.memoryStrength; i++) {
-                let index = currQ.next;
-                if (currentQuestion.memoryStrength > user.questions.length) {
-                  currentQuestion.memoryStrength = user.questions.length - 1;
-                  index = user.questions.length - 1;
-                }
-                insertAfterQuestion = user.questions[index];
-                currQ = user.questions[currQ.next];
-              }
-
-              if (insertAfterQuestion.next === null) {
-                currentQuestion.next = null;
-              // otherwise set the currentQuestion to point to the node after the insertion point
-              } else {
-                currentQuestion.next = insertAfterQuestion.next;
-              }
-              // set the insertion point to point to the original index of the currentQuestion
-              insertAfterQuestion.next = currentIndex;
-              console.log(user)
-              user.save();
-            // }
-            // newQuestions.questions[user.head].next = newQuestions.questions[newQuestions.questions[user.head].memoryStrength].next
-            // newQuestions.questions[newQuestions.questions[user.head].memoryStrength].next = user.head
-            // newQuestions.head = newHead
-            // console.log(newQuestions)
-            return user
-          })
-          .then((user)=>res.json({bool: true, name: resultPokemonName}))
-          .catch(err => next(err));
-        // send user feedback using res.json
-      } else {
-        User
-          .findById(userId)
-          .then(user => {
-            let currentQuestion = user.questions[user.head]
-            let currentIndex = user.head
+          } else {
             currentQuestion.memoryStrength = 1;
-            user.head = currentQuestion.next;
-            let insertAfterQuestion = currentQuestion;
-            let currQ = currentQuestion;
-              for (let i = 0; i < currentQuestion.memoryStrength; i++) {
-                let index = currQ.next;
-                if (currentQuestion.memoryStrength > user.questions.length) {
-                  currentQuestion.memoryStrength = user.questions.length - 1;
-                  index = user.questions.length - 1;
-                }
-                insertAfterQuestion = user.questions[index];
-                currQ = user.questions[currQ.next];
-              }
+          }
 
-              if (insertAfterQuestion.next === null) {
-                currentQuestion.next = null;
-              // otherwise set the currentQuestion to point to the node after the insertion point
-              } else {
-                currentQuestion.next = insertAfterQuestion.next;
-              }
-              // set the insertion point to point to the original index of the currentQuestion
-              insertAfterQuestion.next = currentIndex;
-        
-              user.save();
-              return user
-          })
-            .then((user)=>res.json({bool: false, name: resultPokemonName}))
-          .catch(err => next(err));
-      }
+          // loop thru linked list and find an insertion point
+          let insertAfterQuestion = currentQuestion;
+          let tempQuestion = currentQuestion;
+          for (let i = 0; i < currentQuestion.memoryStrength; i++) {
+            let index = tempQuestion.next;
+            if (currentQuestion.memoryStrength > user.questions.length) {
+              currentQuestion.memoryStrength = user.questions.length - 1;
+              index = user.questions.length - 1;
+            }
+            insertAfterQuestion = user.questions[index];
+            tempQuestion = user.questions[tempQuestion.next];
+          }
+
+          // if the insertion point is at the end, make the currQuestion point to null
+          if (insertAfterQuestion.next === null) {
+            currentQuestion.next = null;
+            // otherwise set the currentQuestion to point to the node after the insertion point
+          } else {
+            currentQuestion.next = insertAfterQuestion.next;
+          }
+          // set the insertion point to point to the original index of the currentQuestion
+          insertAfterQuestion.next = currentHead;
+
+          user.save();
+          return answer;
+        })
+        .then(answer => res.json(answer))
+        .catch(err => next(err));
     })
     .catch(err => {
-      // Forward validation errors on to the client, otherwise give a 500
-      // error because something unexpected has happened
+      // forward validation errors on to the client, otherwise give a 500 error because something unexpected has happened
       if (err.reason === 'ValidationError') {
         return res.status(err.code).json(err);
       }
       res.status(500).json({code: 500, message: 'Internal server error'});
     });
 });
+
+// mongoimport --uri MONGODB_URI --collection COLLECTION_NAME --file FILE_NAME --jsonArray
+
+/* ========== GET A POKEMON ========== */
+// router.get('/:count', (req, res, next) => {
+//   console.log(req.params.count);
+//   return Question
+//     .findOne().skip(Number(req.params.count))
+//     .then(result=>res.json(result))
+//     .catch(err => {
+//       // Forward validation errors on to the client, otherwise give a 500
+//       // error because something unexpected has happened
+//       if (err.reason === 'ValidationError') {
+//         return res.status(err.code).json(err);
+//       }
+//       res.status(500).json({code: 500, message: 'Internal server error'});
+//     });
+// });
+
+// /* ========== GET ANSWER FOR A POKEMON ========== */
+// router.post('/', (req, res, next) => {
+//   // const { id } = req.params;
+//   const { input, id } = req.body;
+//   return Question
+//     .findById(id)
+//     .then(result => result.name === input ? res.json({bool: true, name: result.name}) : res.json({bool: false, name: result.name}))
+//     .catch(err => {
+//       // Forward validation errors on to the client, otherwise give a 500
+//       // error because something unexpected has happened
+//       if (err.reason === 'ValidationError') {
+//         return res.status(err.code).json(err);
+//       }
+//       res.status(500).json({code: 500, message: 'Internal server error'});
+//     });
+// });
 
 module.exports = router;
