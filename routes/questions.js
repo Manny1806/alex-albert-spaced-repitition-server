@@ -12,10 +12,12 @@ const Question = require('../models/question.js');
 /* ========== GET A POKEMON ========== */
 router.post('/', jwtAuth, (req, res, next) => {
   const { id } = req.body;
-  console.log(id);
   return User
     .findById(id)
-    .then(user => res.json(user.questions[user.head]))
+    .then(user => {
+      console.log(user.questions[user.head]);
+      return res.json(user.questions[user.head]);
+    })
     .catch(err => next(err));
 });
 
@@ -45,8 +47,11 @@ router.post('/:id', jwtAuth, (req, res, next) => {
           if (answer.bool) {
             // if answer is correct, double memoryStrength
             currentQuestion.memoryStrength *= 2;
+            currentQuestion.attempts++;
+            currentQuestion.passed++;
           } else {
             currentQuestion.memoryStrength = 1;
+            currentQuestion.attempts++;
           }
 
           // loop thru linked list and find an insertion point

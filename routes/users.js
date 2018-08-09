@@ -89,6 +89,8 @@ router.post('/', (req, res, next) => {
         return {
           question,
           memoryStrength: 1,
+          attempts: 0,
+          passed: 0,
           next: index === results.length - 1 ? null : index + 1
         };
       });

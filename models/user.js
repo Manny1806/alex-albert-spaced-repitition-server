@@ -4,23 +4,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true
-  },
-  lastName: {
-    type: String,
-    required: true
-  },
-  username: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
+  firstName: {type: String, required: true},
+  lastName: {type: String, required: true},
+  username: {type: String, required: true, unique: true},
+  password: {type: String, required: true},
   questions: [
     {
       question: {
@@ -31,14 +18,13 @@ const userSchema = new mongoose.Schema({
         imageDescription: {type: String, required: true},
         description: {type: String, required: true},
       },
-      memoryStrength: Number,
-      next: Number
+      memoryStrength: {type: Number, default: 0},
+      attempts: {type: Number, default: 0},
+      passed: {type: Number, default: 0},
+      next: {type: Number}
     }
   ],
-  head: {
-    type: Number,
-    default: 0
-  }
+  head: {type: Number, default: 0}
 });
 
 userSchema.set('timestamps', true);
