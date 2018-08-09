@@ -85,7 +85,7 @@ router.post('/', (req, res, next) => {
     .find()
     .then(results => {
       questions = results.map((question, index) => {
-        delete question.name;
+        // delete question.name;
         return {
           question,
           memoryStrength: 1,

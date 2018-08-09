@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema({
         imageURL: {type: String, required: true},
         imageDescription: {type: String, required: true},
         description: {type: String, required: true},
+        name: {type: String, required: true}
       },
       memoryStrength: {type: Number, default: 0},
       attempts: {type: Number, default: 0},
