@@ -32,7 +32,7 @@ router.post('/:id', jwtAuth, (req, res, next) => {
       const answer = {
         name: user.questions[user.head].question.name
       };
-      if (user.questions[user.head].question.name === input) {
+      if (user.questions[user.head].question.name.toLowerCase() === input.toLowerCase()) {
         answer.bool = true;
       }
       else {
