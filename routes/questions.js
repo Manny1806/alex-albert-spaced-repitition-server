@@ -15,7 +15,6 @@ router.get('/:id', jwtAuth, (req, res, next) => {
   return User
     .findById(id)
     .then(user => {
-      console.log(user.questions[user.head]);
       delete user.questions[user.head].question.name;
       return res.json(user.questions[user.head]);
     })

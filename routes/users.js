@@ -38,8 +38,8 @@ router.post('/', (req, res, next) => {
   }
 
   // verify all fields have no whitespace
-  const explicityTrimmedFields = ['firstName', 'lastName', 'username', 'password'];
-  const nonTrimmedField = explicityTrimmedFields.find(field => req.body[field].trim() !== req.body[field]);
+  const trimmedFields = ['firstName', 'lastName', 'username', 'password'];
+  const nonTrimmedField = trimmedFields.find(field => req.body[field].trim() !== req.body[field]);
 
   if (nonTrimmedField) {
     return res.status(422).json({
@@ -98,7 +98,7 @@ router.post('/', (req, res, next) => {
     .then(() => User.find({username}).count())
     .then(count => {
       if (count > 0) {
-      // There is an existing user with the same username
+        // There is an existing user with the same username
         return Promise.reject({
           code: 422,
           reason: 'ValidationError',
@@ -116,22 +116,16 @@ router.post('/', (req, res, next) => {
         password: digest,
         questions
       };
-      console.log(newUser);
       return User.create(newUser);
     })
-    .then(user => {
-      console.log(user);
-      return res
-        .status(201)
-        .location(`/api/users/${user.id}`)
-        .json(user);
-    })
+    .then(user => res.status(201).location(`/api/users/${user.id}`).json(user))
     .catch(err => {
       // Forward validation errors on to the client, otherwise give a 500
       // error because something unexpected has happened
       if (err.reason === 'ValidationError') {
         return res.status(err.code).json(err);
       }
+      console.log(err);
       res.status(500).json({code: 500, message: 'Internal server error'});
     });
 });
