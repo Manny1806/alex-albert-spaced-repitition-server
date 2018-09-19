@@ -43,3 +43,68 @@ Requires the [Heroku CLI client](https://devcenter.heroku.com/articles/heroku-co
 ### Deploying to Heroku
 
 * Push your code to Heroku: `git push heroku master`
+### API endspoints
+-----------------
+All requests and responses are in JSON format.
+
+|Action|Path|
+|------|----|
+|Users|https://pokemon-learning-center-server.herokuapp.com/api/users|
+|Authentication|https://pokemon-learning-center-server.herokuapp.com/api/auth|
+|Questions|https://pokemon-learning-center-server.herokuapp.com/api/questions|
+|Events|https://music-server-sioux-city.herokuapp.com/api/events|
+
+## Users
+`POST` request to endpoint `/` is for creating user documents. It accepts the following request body,
+```
+{
+  username,
+  password,
+  firstName, --optional
+  lastName, --optional
+  
+}
+```
+username will be rejected if it is not a unique username or band name. Once a user document is successfully created, this will be the server's response.
+```
+{
+  id,
+  username,
+  firstName, 
+  lastName, 
+}
+```
+## Authentication
+`POST` to `/login` endpoint for creation of JWT. It accepts the following request body,
+```
+{
+  username,
+  password
+}
+```
+This endpoint takes in the username and verifies the password. When validated, the server will respond with a token,
+```
+{
+  authToken
+}
+```
+`POST` to `/refresh` will send back another token with a newer expiriation. No request body is necessary as an existing and valid JWT must be provided to access this endpoint.
+
+## Questions
+`POST` request to endpoint `/id` is getting answer to questions. It accepts the following request body,
+```
+{
+  input,
+  userId
+}
+```
+this will be the server's response.
+```
+{
+   name,
+   bool,
+   attempts,
+   passed
+}
+```
+
