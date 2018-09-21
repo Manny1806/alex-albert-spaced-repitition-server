@@ -3,80 +3,80 @@
     "pokedex": 1,
     "name": "Bulbasaur",
     "typeColor": "#4DBD33",
-    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png",
-    "imageDescription": "A green Pokemon with a bud on its back",
-    "description": "This grass type Pokemon has a bud on its back. It is half plant and half animal."
+    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/1200px-001Bulbasaur.png",
+    "imageDescription": "A green Pokémon with a bud on its back",
+    "description": "This grass type Pokémon has a bud on its back. It is half plant and half animal."
   },
   {
     "pokedex": 132,
     "name": "Ditto",
     "typeColor": "#A8A878",
-    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/3/36/132Ditto.png/250px-132Ditto.png",
-    "imageDescription": "A purple shapeless Pokemon.",
-    "description": "This formless Pokemon has the unique ability to transform itself into other Pokemon species, mimicking their apperance and abilities."
+    "imageURL": "https://cdn.bulbagarden.net/upload/3/36/132Ditto.png",
+    "imageDescription": "A purple shapeless Pokémon.",
+    "description": "This formless Pokémon has the unique ability to transform itself into other Pokémon species, mimicking their appearance and abilities."
   },
   {
     "pokedex": 143,
     "name": "Snorlax",
     "typeColor": "#A8A878",
-    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/f/fb/143Snorlax.png/250px-143Snorlax.png",
-    "imageDescription": "A giant blue Pokemon with big yello tummy.",
-    "description": "This Pokemon likes naps in the middle of the day (and middle of the road). Despite it's laziness, It's bulk makes it a formidable opponent in battle."
+    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/f/fb/143Snorlax.png/1200px-143Snorlax.png",
+    "imageDescription": "A giant blue Pokémon with big yellow tummy.",
+    "description": "This Pokémon likes naps in the middle of the day (and middle of the road). Despite it's laziness, its bulk makes it a formidable opponent in battle."
   },
   {
-    "pokedex": 59,
-    "name": "Arcanine",
+    "pokedex": 4,
+    "name": "Charmander",
     "typeColor": "#F08030",
-    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/b/b8/059Arcanine.png/250px-059Arcanine.png",
-    "imageDescription": "An orange quadruped Pokemon with fluffy fur on head and tail.",
-    "description": "This fire type Pokemon serve as a brave and loyal companion. It is admired for its ferocity, speed, and beauty."
+    "imageURL": "https://cdn.bulbagarden.net/upload/7/73/004Charmander.png",
+    "imageDescription": "An orange bipedal Pokémon with a flame on the tip of its tail.",
+    "description": "This fire type Pokémon is unique for its undying flame at the tip of its tail. It is said that this Pokémon will die if its flame is to ever go out."
   },
   {
     "pokedex": 25,
     "name": "Pikachu",
     "typeColor": "#F8D030",
-    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/0/0d/025Pikachu.png/250px-025Pikachu.png",
-    "imageDescription": "A yellow Pokemon with rosie cheeks, long pointy ears, and a bolt-shaped tail.",
-    "description": "This electric Pokemon might have a cute appearance, but it can discharge potent electric shocks. It is a very popular Pokemon."
+    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/0/0d/025Pikachu.png/1200px-025Pikachu.png",
+    "imageDescription": "A yellow Pokémon with rosy cheeks, long pointy ears, and a bolt-shaped tail.",
+    "description": "This electric Pokémon might have a cute appearance, but it can discharge potent electric shocks. It is a very popular Pokémon."
   },
   {
     "pokedex": 133,
     "name": "Eevee",
     "typeColor": "#A8A878",
-    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/e/e2/133Eevee.png/250px-133Eevee.png",
-    "imageDescription": "A brown quadruped Pokemon with pointy ears, big eyes, and a fluffy collar and tail.",
-    "description": "This Pokemon has largely been domesticated and rarely found in the wild. Its evolutionary path is very diverse, making it a very popular choice for trainers."
+    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/e/e2/133Eevee.png/1200px-133Eevee.png",
+    "imageDescription": "A brown quadruped Pokémon with pointy ears, big eyes, and a fluffy collar and tail.",
+    "description": "This Pokémon has largely been domesticated and rarely found in the wild. Its evolutionary path is very diverse, making it a very popular choice for trainers."
   },
   {
     "pokedex": 131,
     "name": "Lapras",
     "typeColor": "#6890F0",
-    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/a/ab/131Lapras.png/250px-131Lapras.png",
-    "imageDescription": "A blue Pokemon with a long neck, a large gray shell on its back, and four flippers.",
-    "description": "This rare water type Pokemon was nearly hunted to extinction. It can be used as a ferry across open waters but its docile nature make for an easy prey for pouchers."
+    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/a/ab/131Lapras.png/1200px-131Lapras.png",
+    "imageDescription": "A blue Pokémon with a long neck, a large gray shell on its back, and four flippers.",
+    "description": "This rare water type Pokémon was nearly hunted to extinction. It can be used as a ferry across open waters but its docile nature make for an easy prey for poachers."
   },
   {
-    "pokedex": 129,
-    "name": "Magikarp",
+    "pokedex": 7,
+    "name": "Squirtle",
     "typeColor": "#6890F0",
-    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/0/02/129Magikarp.png/250px-129Magikarp.png",
-    "imageDescription": "An orange fish-like pokemon with long whiskers and blank eyes.",
-    "description": "This water type Pokemon does not do much on land. But legend has it that they will evolve into a powerful being by swimming up a waterfall and leaping over a mountain."
+    "imageURL": "https://cdn.bulbagarden.net/upload/3/39/007Squirtle.png",
+    "imageDescription": "A blue Pokémon with large eyes, a round head, shell, and tail.",
+    "description": "This Pokémon resembles a turtle. It can withdraw into its hard shell for protection and attack by spraying water from its mouth with amazing accuracy."
   },
   {
     "pokedex": 39,
     "name": "Jigglypuff",
     "typeColor": "#EE99AC",
-    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/3/3e/039Jigglypuff.png/250px-039Jigglypuff.png",
-    "imageDescription": "A pink balloon-like Pokemon with pointy ears, stubby limbs, and a pair of big cute round eyes.",
-    "description": "Despite its adorable appearance, this Pokemon is known to put its foes to sleep with its soothing lullaby."
+    "imageURL": "https://cdn.bulbagarden.net/upload/3/3e/039Jigglypuff.png",
+    "imageDescription": "A pink balloon-like Pokémon with pointy ears, stubby limbs, and a pair of big cute round eyes.",
+    "description": "Despite its adorable appearance, this Pokémon is known to put its foes to sleep with its soothing lullaby."
   },
   {
     "pokedex": 104,
     "name": "Cubone",
     "typeColor": "#E0C068",
-    "imageURL": "https://cdn.bulbagarden.net/upload/thumb/2/2a/104Cubone.png/250px-104Cubone.png",
-    "imageDescription": "A bipedal Pokemon wearing a skull on its face and holding a bone as weapon.",
-    "description": "This is also known as the Lonely Pokemon as avoids social interaction. It constantly mourns for its mother and wears its mother's skull as helmet."
+    "imageURL": "https://cdn.bulbagarden.net/upload/2/2a/104Cubone.png",
+    "imageDescription": "A bipedal Pokémon wearing a skull on its face and holding a bone as weapon.",
+    "description": "This is also known as the Lonely Pokémon as avoids social interaction. It wears its mother's skull as helmet and constantly mourns for her passing."
   }
 ]
